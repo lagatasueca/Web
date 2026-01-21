@@ -32,39 +32,82 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.querySelectorAll("video[data-end]").forEach((video) => {
+  const loadLazyVideo = (video) => {
+    if (video.dataset.lazyLoaded === "true") return;
+    const src = video.dataset.src;
+    if (!src) return;
+    video.src = src;
+    video.dataset.lazyLoaded = "true";
+    video.removeAttribute("data-src");
+    video.load();
+    if (video.autoplay) {
+      video.play().catch(() => {});
+    }
+  };
+
+  const lazyVideos = Array.from(document.querySelectorAll("video[data-src]"));
+  if (lazyVideos.length) {
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const video = entry.target;
+          loadLazyVideo(video);
+          observer.unobserve(video);
+        });
+      }, { rootMargin: "200px 0px", threshold: 0.01 });
+
+      lazyVideos.forEach((video) => observer.observe(video));
+    } else {
+      lazyVideos.forEach((video) => loadLazyVideo(video));
+    }
+  }
+
+  const setupSegmentLoop = (video) => {
     const start = parseFloat(video.dataset.start || "0");
     const end = parseFloat(video.dataset.end || "0");
     if (Number.isNaN(end) || end <= 0) return;
 
     const pingPong = video.dataset.pingpong === "true";
-    video.currentTime = start;
+    const applyLoop = () => {
+      video.currentTime = start;
 
-    if (pingPong) {
-      video.loop = false;
-      let direction = 1; // 1 forward, -1 backward
-      const epsilon = 0.003;
-      video.playbackRate = 1;
+      if (pingPong) {
+        video.loop = false;
+        let direction = 1; // 1 forward, -1 backward
+        const epsilon = 0.003;
+        video.playbackRate = 1;
 
-      video.addEventListener("timeupdate", () => {
-        if (direction > 0 && video.currentTime >= end - epsilon) {
-          direction = -1;
-          video.playbackRate = -1;
-          video.currentTime = Math.max(start, end - epsilon);
-        } else if (direction < 0 && video.currentTime <= start + epsilon) {
-          direction = 1;
-          video.playbackRate = 1;
-          video.currentTime = Math.min(end, start + epsilon);
-        }
-      });
+        video.addEventListener("timeupdate", () => {
+          if (direction > 0 && video.currentTime >= end - epsilon) {
+            direction = -1;
+            video.playbackRate = -1;
+            video.currentTime = Math.max(start, end - epsilon);
+          } else if (direction < 0 && video.currentTime <= start + epsilon) {
+            direction = 1;
+            video.playbackRate = 1;
+            video.currentTime = Math.min(end, start + epsilon);
+          }
+        });
+      } else {
+        video.addEventListener("timeupdate", () => {
+          if (video.currentTime >= end) {
+            video.currentTime = start;
+            video.play().catch(() => {});
+          }
+        });
+      }
+    };
+
+    if (video.readyState >= 1) {
+      applyLoop();
     } else {
-      video.addEventListener("timeupdate", () => {
-        if (video.currentTime >= end) {
-          video.currentTime = start;
-          video.play();
-        }
-      });
+      video.addEventListener("loadedmetadata", applyLoop, { once: true });
     }
+  };
+
+  document.querySelectorAll("video[data-end]").forEach((video) => {
+    setupSegmentLoop(video);
   });
 
   const sequenceVideos = Array.from(document.querySelectorAll(".sequence-video"));
@@ -90,7 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
         vid.classList.toggle("video-blurred", !isActive);
         if (!isActive) {
           vid.pause();
-          vid.currentTime = 0;
+          if (vid.readyState > 0) {
+            vid.currentTime = 0;
+          }
         }
       });
     };
@@ -101,16 +146,21 @@ document.addEventListener("DOMContentLoaded", () => {
         vid.muted = true;
         vid.playsInline = true;
         vid.autoplay = true;
-        vid.play().catch(() => {});
+        if (!vid.dataset.src) {
+          vid.play().catch(() => {});
+        }
         return;
       }
       vid.addEventListener("mouseenter", () => {
         blurOthers(vid);
+        loadLazyVideo(vid);
         vid.play().catch(() => {});
       });
       vid.addEventListener("mouseleave", () => {
         vid.pause();
-        vid.currentTime = 0;
+        if (vid.readyState > 0) {
+          vid.currentTime = 0;
+        }
         blurAll();
       });
     });
