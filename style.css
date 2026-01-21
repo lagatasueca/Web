@@ -164,7 +164,7 @@ html {
   width: 100%;
   min-height: calc(100vh - 6rem);
   padding-top: 1.5rem;
-  --grid-columns: 6;
+  --grid-columns: 5;
 }
 
 .archive-grid .item-group {
@@ -1172,13 +1172,7 @@ body.theme-dark .theme-toggle {
 
 @media (max-width: 1024px) {
   .grid {
-    --grid-columns: 3;
     --grid-x-padding: 1.5rem;
-  }
-
-  .archive-grid,
-  .camera-page .camera-grid {
-    --grid-columns: 3;
   }
 }
 
@@ -1235,14 +1229,18 @@ body.theme-dark .theme-toggle {
   }
 
   .grid {
-    --grid-columns: 2;
+    --grid-columns: 5;
     --grid-x-padding: 1.25rem;
     --grid-line-extend: 0.5rem;
+    --tile-width: 140px;
+    grid-template-columns: repeat(var(--grid-columns), var(--tile-width));
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .archive-grid,
   .camera-page .camera-grid {
-    --grid-columns: 2;
+    --grid-columns: 5;
   }
 
   .row-label {
@@ -1259,45 +1257,7 @@ body.theme-dark .theme-toggle {
   }
 
   .row-details.is-open {
-    grid-template-columns: 1fr;
-  }
-
-  .row-details__main,
-  .row-details__side {
-    grid-column: 1 / -1;
-    text-align: left;
-    justify-self: start;
-  }
-
-  .row-details__side {
-    grid-row: auto;
-  }
-
-  .row-details__image,
-  .row-details__image--grid,
-  .row-details__image--grid-right,
-  .row-details__image--grid-col-4 {
-    grid-column: 1 / -1;
-    height: auto;
-  }
-
-  .row-media,
-  .row-media--left,
-  .row-media--right,
-  .row-media--center,
-  .row-media--col-1-right,
-  .row-media--col-1-left,
-  .row-media--col-1-mid,
-  .row-media--col-1-center,
-  .row-media--col-2,
-  .row-media--col-2-right,
-  .row-media--col-3,
-  .row-media--col-3-left,
-  .row-media--col-3-center {
-    grid-column: 1 / -1;
-    width: 100%;
-    justify-self: stretch;
-    align-self: stretch;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
   }
 
   .row-media--match-height,
@@ -1315,15 +1275,6 @@ body.theme-dark .theme-toggle {
   .row-media__video--steady,
   .row-media__image--zoom {
     transform: none;
-  }
-
-  .item.col-2,
-  .item.col-3,
-  .item.col-4,
-  .item.col-5,
-  .item.span-2,
-  .item.span-3 {
-    grid-column: auto;
   }
 
   .about {
@@ -1362,13 +1313,8 @@ body.theme-dark .theme-toggle {
 
 @media (max-width: 540px) {
   .grid {
-    --grid-columns: 1;
     --grid-x-padding: 1rem;
-  }
-
-  .archive-grid,
-  .camera-page .camera-grid {
-    --grid-columns: 1;
+    --tile-width: 120px;
   }
 }
 
