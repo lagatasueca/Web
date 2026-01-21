@@ -1375,8 +1375,6 @@ body.theme-dark .theme-toggle {
 }
  @font-face {
         font-family: Serifbabesigma-regular";
--       src: url('static/fonts/Serifbabesigma-regular.woff2') format('woff2'),
--                       url('static/fonts/Serifbabesigma-regular.woff') format('woff');
 +       src: url('/static/fonts/Serifbabesigma-regular.woff2') format('woff2'),
 +                       url('/static/fonts/Serifbabesigma-regular.woff') format('woff');
 
