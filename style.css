@@ -169,7 +169,7 @@ html {
   width: 100%;
   min-height: calc(100vh - 6rem);
   padding-top: 1.5rem;
-  --grid-columns: 5;
+  --grid-columns: 6;
 }
 
 .archive-grid .item-group {
@@ -178,6 +178,7 @@ html {
 
 .archive-grid .item {
   aspect-ratio: 1 / 1;
+  background: transparent;
 }
 
 .camera-page .camera-grid {
@@ -219,11 +220,13 @@ html {
 .ascii-overlay {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
   display: none;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: stretch;
   pointer-events: none;
-  z-index: 20;
+  z-index: 0;
 }
 
 .ascii-overlay.is-active {
@@ -234,15 +237,19 @@ html {
   width: 100%;
   height: 100%;
   margin: 0;
-  font-family: "Serifbabesigma";
-  font-size: 8px;
-  line-height: 8px;
+  font-family: "Courier New", monospace;
+  font-size: 7px;
+  line-height: 7px;
   letter-spacing: 0;
   color: var(--text-color);
-  opacity: 0.25;
+  opacity: 0.35;
   white-space: pre;
   display: block;
   overflow: hidden;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  font-variant-ligatures: none;
 }
 
 .ascii-active .container {
@@ -1241,7 +1248,10 @@ body.theme-dark .theme-toggle {
     justify-content: start;
   }
 
-  .archive-grid,
+  .archive-grid {
+    --grid-columns: 6;
+  }
+
   .camera-page .camera-grid {
     --grid-columns: 5;
   }

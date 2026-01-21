@@ -4,14 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Archive – Emma Ljungqvist</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Cpolygon%20fill='%23000'%20points='50,5%2061,39%2098,39%2068,59%2079,93%2050,72%2021,93%2032,59%202,39%2039,39'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body class="archive-page">
+  <div id="ascii-overlay" class="ascii-overlay" aria-hidden="true">
+    <pre id="ascii-output" class="ascii-output"></pre>
+  </div>
+
   <header class="container header-difference">
     <h1 class="name"><a class="name-link" href="index.html">EMMA <span class="name-nowrap">LJUNGQ<span class="name-kern-v">V</span>IST</span></a></h1>
     <div class="header-actions">
       <nav class="nav-buttons">
-        <a href="index.html" class="nav-button">home</a>
+        <div class="more-buttons" id="more-buttons" aria-hidden="true">
+          <button type="button" class="nav-button" id="prettier-toggle" aria-pressed="false">prettier</button>
+          <a class="nav-button" href="archive.html">archive</a>
+        </div>
+        <button type="button" class="nav-button nav-button--icon more-toggle" aria-label="More" aria-expanded="false" aria-controls="more-buttons"><span class="nav-button__icon">+</span></button>
+        <a href="index.html#about" class="nav-button">About</a>
       </nav>
       <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" aria-pressed="false"></button>
     </div>

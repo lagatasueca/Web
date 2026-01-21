@@ -221,8 +221,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const asciiOutput = document.getElementById("ascii-output");
 
   if (prettierButton && asciiOverlay && asciiOutput && navigator.mediaDevices?.getUserMedia) {
-    const asciiChars = [" ", ".", "!", "e", "l", "E", "L", "&", "(", ")", "*", "+", "x"];
-    const asciiFps = 12;
+    const asciiChars = ["!", "\"", "&", ",", ";", ":", ".", "*", "\u00A8", "^", "E", "e", "L", "l"];
+    const asciiFps = 18;
     let asciiActive = false;
     let asciiStream = null;
     let asciiVideo = null;
@@ -307,7 +307,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const g = pixels[i + 1];
           const b = pixels[i + 2];
           const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-          const idx = Math.min(scale, Math.max(0, Math.round(luminance * scale)));
+          const adjusted = Math.pow(luminance, 1 / 1.2);
+          const idx = Math.min(scale, Math.max(0, Math.round((1 - adjusted) * scale)));
           line += asciiChars[idx];
           i += 4;
         }
