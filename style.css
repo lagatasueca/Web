@@ -1,18 +1,3 @@
-diff --git a/_includes/assets/css/inline.css b/_includes/assets/css/inline.css
-index ff890ac..5d6dfdd 100644
---- a/_includes/assets/css/inline.css
-+++ b/_includes/assets/css/inline.css
-@@ -197,8 +197,8 @@ button {
- }
- @font-face {
-        font-family: Serifbabesigma-regular";
--       src: url('static/fonts/Serifbabesigma-regular.woff2') format('woff2'),
--                       url('static/fonts/Serifbabesigma-regular.woff') format('woff');
-+       src: url('/static/fonts/Serifbabesigma-regular.woff2') format('woff2'),
-+                       url('/static/fonts/Serifbabesigma-regular.woff') format('woff');
-
-}
-
 :root {
   --bg-color: #ffffff;
   --text-color: #000000;
@@ -1386,4 +1371,13 @@ body.theme-dark .theme-toggle {
   html {
     scroll-behavior: auto;
   }
+}
+}
+ @font-face {
+        font-family: Serifbabesigma-regular";
+-       src: url('static/fonts/Serifbabesigma-regular.woff2') format('woff2'),
+-                       url('static/fonts/Serifbabesigma-regular.woff') format('woff');
++       src: url('/static/fonts/Serifbabesigma-regular.woff2') format('woff2'),
++                       url('/static/fonts/Serifbabesigma-regular.woff') format('woff');
+
 }
