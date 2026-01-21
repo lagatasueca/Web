@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Serifbabesigma";
-  src: url("assets/fonts/Serifbabesigma/WOFF/Serifbabesigma-regular.woff2") format("woff2"),
-       url("assets/fonts/Serifbabesigma/WOFF/Serifbabesigma-regular.woff") format("woff");
+  src: url("assets/Serifbabesigma-regular.woff2") format("woff2"),
+       url("assets/Serifbabesigma-regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
