@@ -530,6 +530,11 @@ body.theme-dark.ascii-active {
   transform: none;
 }
 
+.row-media--fit iframe.row-media__video {
+  aspect-ratio: 9 / 16;
+  height: auto;
+}
+
 .row-media--match-height {
   height: calc(((var(--tile-width) * 3) + (var(--grid-gap) * 2)) * 0.5625);
 }
