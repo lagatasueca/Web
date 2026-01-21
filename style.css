@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "Serifbabe";
+  src: url("fonts/Serifbabe%20SIGMA/WOFF/SerifbabeSIGMA-Regular.woff2") format("woff2"),
+       url("fonts/Serifbabe%20SIGMA/WOFF/SerifbabeSIGMA-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg-color: #ffffff;
   --text-color: #000000;
@@ -1371,11 +1380,4 @@ body.theme-dark .theme-toggle {
   html {
     scroll-behavior: auto;
   }
-}
-}
- @font-face {
-        font-family: Serifbabesigma-regular";
-+       src: url('/static/fonts/Serifbabesigma-regular.woff2') format('woff2'),
-+                       url('/static/fonts/Serifbabesigma-regular.woff') format('woff');
-
 }
