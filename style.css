@@ -245,11 +245,7 @@ html {
 }
 
 body.ascii-active {
-  text-shadow:
-    1px 0 0 var(--ascii-outline, #ffffff),
-    -1px 0 0 var(--ascii-outline, #ffffff),
-    0 1px 0 var(--ascii-outline, #ffffff),
-    0 -1px 0 var(--ascii-outline, #ffffff);
+  text-shadow: none;
 }
 
 body.ascii-active .ascii-output {
