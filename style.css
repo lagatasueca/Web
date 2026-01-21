@@ -25,6 +25,39 @@ body.archive-page {
   --tile-color: var(--bg-color);
 }
 
+/* MOBILE BLOCKER */
+.mobile-blocker {
+  display: none;
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Serifbabesigma";
+  font-size: clamp(1rem, 4.5vw, 1.6rem);
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  padding: 2.5rem;
+  z-index: 100;
+}
+
+.mobile-blocker__message {
+  max-width: 22ch;
+  margin: 0;
+}
+
+.mobile-blocker__dots {
+  display: inline-block;
+  width: 0ch;
+  overflow: hidden;
+  vertical-align: bottom;
+  margin-left: 0.2em;
+  font-family: "Courier New", monospace;
+  animation: mobile-dots 1.2s steps(6, end) infinite;
+}
+
 /* RESET */
 * {
   box-sizing: border-box;
@@ -1340,8 +1373,22 @@ body.theme-dark .theme-toggle {
   100% { transform: translateX(calc(50% - 0.75rem)); }
 }
 
+@keyframes mobile-dots {
+  to { width: 6ch; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  body > *:not(.mobile-blocker) {
+    display: none !important;
+  }
+
+  .mobile-blocker {
+    display: flex;
   }
 }
