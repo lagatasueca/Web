@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("theme-toggle");
   const body = document.body;
-
+  const toggle = document.getElementById("theme-toggle");
   if (!toggle) return;
 
   const setTheme = (isDark) => {
